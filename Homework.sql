@@ -70,6 +70,11 @@ WHERE first_name = 'HARPO';
 #5a. You cannot locate the schema of the address table. Which query would you use to re-create it?
 SHOW CREATE TABLE address;
 
+#6a. Use JOIN to display the first and last names, as well as the address, of each staff member. Use the tables staff and address
+SELECT s.first_name, s.last_name, a.address, a.address2, a.postal_code
+FROM staff s
+JOIN address a on a.address_id = s.address_id;
+
 #6b. Use JOIN to display the total amount rung up by each staff member in August of 2005. Use tables staff and payment.
 select * from payment WHERE payment_date like '%2005-08%';
 SELECT s.staff_id, SUM(amount) AS amount
@@ -113,7 +118,7 @@ WHERE actor_id IN (
 					SELECT actor_id FROM film_actor WHERE film_id in (
 																		SELECT film_id FROM film WHERE title = 'Alone Trip'));
                                                                         
-#7b. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. 
+#7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. 
 #Use joins to retrieve this information.
 SELECT cu.first_name, cu.last_name, cu.email
 FROM customer cu
@@ -144,7 +149,7 @@ JOIN staff sa ON sa.store_id = s.store_id
 JOIN payment p ON p.staff_id = sa.staff_id
 GROUP BY sa.store_id;
 
-#7e.Write a query to display for each store its store ID, city, and country.
+#7f.Write a query to display for each store its store ID, city, and country.
 SELECT s.store_id, city, country
 FROM store s
 JOIN address a ON s.address_id = a.address_id
